@@ -1,6 +1,6 @@
 name: Managed Build and Push Chart to Repository
 description: Builds and pushes a chart to a managed repository
-uses:
+inputs:
   chart-path:
     description: Path to the chart to build and push
     required: true
