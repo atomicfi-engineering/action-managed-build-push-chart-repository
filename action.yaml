@@ -1,21 +1,18 @@
-name: 'Hello World' # taken from https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
-description: 'Greet someone'
-inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
+name: Managed Build and Push Chart to Repository
+description: Builds and pushes a chart to a managed repository
+uses:
+  chart-path:
+    description: Path to the chart to build and push
     required: true
-    default: 'World'
-outputs:
-  random-number:
-    description: "Random number"
-    value: ${{ steps.random-number-generator.outputs.random-id }}
-runs:
+run:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
-      shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
-      shell: bash
-    - run: ${{ github.action_path }}/goodbye.sh
-      shell: bash
+    - name: Build and push chart to ECR
+      uses: atomicfi/action-build-push-chart-ecr@v1.0.0
+      with:
+        chart-path: ${{ inputs.chart-path }}
+        aws-access-key-id: ${{ secrets.GH_USER_ACCESS_TOKEN }}
+        aws-secret-access-key: ${{ secrets.GH_USER_SECRET }}
+        aws-region: us-east-1
+        role-duration-seconds: 900
+        role-to-assume: arn:aws:iam::892765726487:role/GithubActionsRole

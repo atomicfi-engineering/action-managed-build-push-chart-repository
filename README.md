@@ -1,11 +1,11 @@
 <!-- start title -->
 
-# GitHub Action:Hello World
+# GitHub Action:Managed Build and Push Chart to Registry
 
 <!-- end title -->
 <!-- start description -->
 
-Greet someone
+Builds and pushes a chart to a registry in a managed fashion for internal use
 
 <!-- end description -->
 <!-- start contents -->
@@ -13,27 +13,22 @@ Greet someone
 <!-- start usage -->
 
 ```yaml
-- uses: atomicfi/action-composite-action-template@undefined
+- uses: atomicfi/action-managed-build-push-chart-repository@undefined
   with:
-    # Who to greet
-    # Default: World
-    who-to-greet: ""
+    # Path to the chart to build and push. Required.
+    # Default:
+    chart-path: ""
 ```
 
 <!-- end usage -->
 <!-- start inputs -->
 
-| **Input**          | **Description** | **Default** | **Required** |
-| :----------------- | :-------------- | :---------: | :----------: |
-| **`who-to-greet`** | Who to greet    |   `World`   |   **true**   |
+| **Input**        | **Description**                     | **Default** | **Required** |
+| :--------------- | :---------------------------------- | :---------: | :----------: |
+| **`chart-path`** | Path to the chart to build and push |             |   **true**   |
 
 <!-- end inputs -->
 <!-- start outputs -->
-
-| **Output**      | **Description** | **Default** | **Required** |
-| :-------------- | :-------------- | ----------- | ------------ |
-| `random-number` | Random number   |             |              |
-
 <!-- end outputs -->
 <!-- start examples -->
 
@@ -43,17 +38,11 @@ Greet someone
 on: [push]
 
 jobs:
-  hello_world_job:
+  build-and-push-chart:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      - uses: actions/checkout@v2
-      - id: foo
-        uses: actions/hello-world-composite-action@v1
-        with:
-          who-to-greet: "Mona the Octocat"
-      - run: echo random-number ${{ steps.foo.outputs.random-number }}
-        shell: bash
+      - uses: actions/checkout@v3
+      - uses: atomicfi/action-managed-build-push-chart-repository@v1.0.0
 ```
 
 <!-- end examples -->
