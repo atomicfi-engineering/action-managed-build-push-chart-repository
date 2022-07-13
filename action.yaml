@@ -4,6 +4,12 @@ inputs:
   chart-path:
     description: Path to the chart to build and push
     required: true
+  aws-access-key-id:
+    description: AWS access key id
+    required: true
+  aws-secret-access-key:
+    description: AWS secret access key
+    required: true
 run:
   using: "composite"
   steps:
@@ -11,8 +17,8 @@ run:
       uses: atomicfi/action-build-push-chart-ecr@v1.0.0
       with:
         chart-path: ${{ inputs.chart-path }}
-        aws-access-key-id: ${{ secrets.GH_USER_ACCESS_TOKEN }}
-        aws-secret-access-key: ${{ secrets.GH_USER_SECRET }}
+        aws-access-key-id: ${{ inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ inputs.aws-secret-access-key }}
         aws-region: us-east-1
         role-duration-seconds: 900
         role-to-assume: arn:aws:iam::892765726487:role/GithubActionsRole
