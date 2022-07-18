@@ -14,7 +14,7 @@ runs:
   using: "composite"
   steps:
     - name: Build and push chart to ECR
-      uses: atomicfi/action-build-push-chart-ecr@v1.1.0-beta.1
+      uses: atomicfi/action-build-push-chart-ecr@fix-shell-stuff
       with:
         chart-path: ${{ inputs.chart-path }}
         aws-access-key-id: ${{ inputs.aws-access-key-id }}
