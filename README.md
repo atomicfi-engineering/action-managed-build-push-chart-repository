@@ -13,7 +13,7 @@ Builds and pushes a chart to a registry in a managed fashion for internal use
 <!-- start usage -->
 
 ```yaml
-- uses: atomicfi/action-managed-build-push-chart-repository@undefined
+- uses: atomicfi-engineering/action-managed-build-push-chart-repository@undefined
   with:
     # Path to the chart to build and push. Required.
     # Default:
@@ -49,7 +49,7 @@ jobs:
   build-and-push-chart:
     runs-on: ubuntu-latest
     steps:
-      - uses: atomicfi/action-managed-build-push-chart-repository@v1.0.0
+      - uses: atomicfi-engineering/action-managed-build-push-chart-repository@v1.0.0
         with:
           chart-path: ./charts/my-chart
           aws-access-key-id: ${{ secrets.YOUR_AWS_ACCESS_KEY_ID }}
