@@ -1,3 +1,4 @@
+# action.yaml
 name: Managed Build and Push Chart to Repository
 description: Builds and pushes a chart to a managed repository
 inputs:
